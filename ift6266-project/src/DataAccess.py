@@ -45,12 +45,13 @@ def getTrainingData(batch_idx, batch_size,
             input = np.copy(img_array)
             input[center[0] - 16:center[0] + 16, center[1] - 16:center[1] + 16, :] = 0
             target = img_array[center[0] - 16:center[0] + 16, center[1] - 16:center[1] + 16]
-
+            
+        Image.fromarray(input).show()
 
         batch_input.append(input)
         batch_target.append(target)
 
-    return np.array(batch_input), np.array(batch_target)
+    return np.array(batch_input,dtype='float32') / 256, np.array(batch_target,dtype='float32') / 256
 
 def splitChannel(img):
     return np.array([[y[0] for y in x] for x in img]), np.array([[y[1] for y in x] for x in img]), np.array([[y[2] for y in x] for x in img])
